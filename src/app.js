@@ -5,37 +5,32 @@ import "./style.css";
 import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
-window.onload = () => {
-  document.querySelector("#btn").addEventListener("click", () => {
-    document.querySelector("#the-domain").innerHTML = generateDomain();
-  });
-};
+// BUENO:
+window.onload = function() {
+  function domainNameGenerator() {
+    let pronoun = ["the", "my", "our", "a", "your"];
+    let adj = ["great", "grand", "big", "super", "new", "free", "good", "nice"];
+    let noun = ["web", "space", "website", "place"];
+    let extension = [".com", ".es", ".net", ".us", ".io", ".org", ".web"];
 
-let generateDomain = () => {
-  let pronoun = ["the", "my", "our", "a", "your"];
-  let adjective = [
-    "great",
-    "grand",
-    "big",
-    "super",
-    "new",
-    "free",
-    "good",
-    "nice"
-  ];
-  let noun = ["web", "space", "website", "place"];
-  let extension = [".com", ".es", ".net", ".us", ".io", ".org", ".web"];
+    let allDomains = [];
 
-  let proIndex = Math.floor(Math.random() * pronoun.length);
-  let adjIndex = Math.floor(Math.random() * adjective.length);
-  let nouIndex = Math.floor(Math.random() * noun.length);
-  let extIndex = Math.floor(Math.random() * extension.length);
-
-  return (
-    "www." +
-    pronoun[proIndex] +
-    adjective[adjIndex] +
-    noun[nouIndex] +
-    extension[extIndex]
-  );
+    for (let i = 0; i < pronoun.length; i++) {
+      for (let description = 0; description < adj.length; description++) {
+        for (let thing = 0; thing < noun.length; thing++) {
+          for (let address = 0; address < extension.length; address++) {
+            allDomains.push(
+              pronoun[i] + adj[description] + noun[thing] + extension[address]
+            );
+          }
+        }
+      }
+    }
+    return allDomains;
+  }
+  let domainCombo = domainNameGenerator();
+  for (let a = 0; a < domainCombo.length; a++) {
+    document.querySelector("#domain-names").innerHTML +=
+      "<p>" + domainCombo[a] + "</p>";
+  }
 };
